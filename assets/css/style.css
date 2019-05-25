@@ -1,0 +1,40 @@
+body {
+    background-image: url(../images/bats-wallpaper.jpg);
+    background-size: 900px 800px;
+    background-repeat: repeat;
+    color: red;
+}
+
+#quizArea {
+    position: fixed;
+    height: 500px;
+    width: 500px;
+    background-color: white;
+    left: 400px;
+    top: 75px;
+}
+
+#countDown {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+#showQuestion {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+#showPossibleAnswers {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+#startButton {
+    margin: 20px;
+}
