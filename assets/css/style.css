@@ -1,24 +1,29 @@
+@font-face {
+    font-family: batmanFont;
+    src: url(../images/DKC\ Forever.ttf);
+}
+
 body {
     background-image: url(../images/bats-wallpaper.jpg);
     background-size: 900px 800px;
     background-repeat: repeat;
-    color: red;
 }
 
 #quizArea {
     position: fixed;
-    height: 500px;
-    width: 500px;
+    min-height: 350px;
+    width: 510px;
     background-color: white;
     left: 400px;
     top: 75px;
+    font-family: batmanFont;
 }
 
 #countDown {
     display: flex;
     align-items: center;
     justify-content: center;
-
+    font-size: 15px;
 }
 
 #showQuestion {
@@ -26,6 +31,7 @@ body {
     align-items: center;
     justify-content: center;
     padding: 20px;
+    font-size: 20px;
 }
 
 #showPossibleAnswers {
@@ -33,8 +39,28 @@ body {
     align-items: center;
     justify-content: center;
     padding: 20px;
+    font-size: 18px;
 }
 
 #startButton {
     margin: 20px;
+    background-color: purple;
+    border-color: black;
+    border-radius: 5px;
+    font-family: batmanFont;
+}
+
+#header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: batmanFont;
+    color: purple;
+    font-size: 30px;
+    background-color: black;
+    height: 40px;
+    width: 800px;
+    position: relative;
+    left: 250px;
+    border-radius: 5px; 
 }

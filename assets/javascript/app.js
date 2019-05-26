@@ -10,11 +10,11 @@ $(document).ready(function() {
 
   // questionn / answers / correct answerd
   var quiz = [
-    { question: "What are the names of Bruce Wayne's parents?", answers: ["James and Dorthy", "Thomas and Martha", "John and Elizabeth", "Anthony and Patricia"], correct: 1, },
-    { question: "Which of these villains was introduced first?", answers: ["The Riddler", "Penguin", "Killer Croc", "Catwoman"], correct: 3 },
-    { question: "What is the original identity of Two-Face?", answers: ["Harvey Dent", "Timmy Pickles", "Eli Pennyworth", "Michael Gill"], correct: 0 },
-    { question: "Which character becomes Oracle after being shot?", answers: ["Catwoman", "Poison Ivy", "Batgirl", "Batwoman"], correct: 2 },
-    { question: "Which of the following characters is an actual Batman villian?", answers: ["Calendar Man", "Ice Man", "Phone Man", "Alligator Man"], correct: 0 }
+    { question: "What are the names of Bruce Wayne's parents?", answers: ["James and Dorthy", "Thomas and Martha", "John and Elizabeth", "Anthony and Patricia"], correct: 1, animate: "https://giphy.com/gifs/jIzXYqaQ0nLkA/html5" },
+    { question: "Which of these villains was introduced first?", answers: ["The Riddler", "Penguin", "Killer Croc", "Catwoman"], correct: 3, animate: "https://giphy.com/gifs/TlK63EvSQlC3joA3Zja/html5" },
+    { question: "What is the original identity of Two-Face?", answers: ["Harvey Dent", "Timmy Pickles", "Eli Pennyworth", "Michael Gill"], correct: 0, animate: "https://giphy.com/gifs/y4G4trcBoUgWk/html5" },
+    { question: "Which character becomes Oracle after being shot?", answers: ["Catwoman", "Poison Ivy", "Batgirl", "Batwoman"], correct: 2, animate: "https://giphy.com/gifs/bJaxgozZusl2g/html5" },
+    { question: "Which of the following characters is an actual Batman villian?", answers: ["Calendar Man", "Ice Man", "Phone Man", "Alligator Man"], correct: 0, animate: "https://giphy.com/gifs/3ohzdCTBKqn8nviNdm/html5" }
 ];
 
   console.log(quiz);
@@ -22,13 +22,13 @@ $(document).ready(function() {
   console.log(quiz[1].answers[1]);
 
   function win(){
-      var imageWin = 
+      animate()
       correctAnswers++
       index++
     setTimeout(function(){}, 3000);
   }
   function lose(){
-    var imageLose = 
+    animate: "https://giphy.com/gifs/Sid4QgwDxJ8l2/html5" 
     incorrectAnswers++
     index++
   setTimeout(function(){}, 3000);
@@ -51,12 +51,13 @@ $(document).ready(function() {
 
   function showTriva() {
     $("#showQuestion").html(quiz[index].question);
-    for (var i = 0; i < quiz[index].answers.length; i++) {
-      var answerButton= $("<button>");
+    var answerButton= $("<button>");
       answerButton.html(quiz[index].answers[i]);
       answerButton.attr("id", quiz[index].answers[i]);
+    for (var i = 0; i < quiz[index].answers.length; i++) {
       $("#showPossibleAnswers").append(answerButton + "<br>");
-
+    }
+    
         $(answerButton).on("click", function(){
             var userResponse = $(this).attr("id")
             if(userResponse===quiz[index].correct){
@@ -71,7 +72,7 @@ $(document).ready(function() {
             
         })
         
-      }
+      
       
     }
     
@@ -98,7 +99,7 @@ $("#startButton").on("click", run);
   function stop() {
     clearInterval(intervalId);
   }
-//   run();
+
 
 
   
