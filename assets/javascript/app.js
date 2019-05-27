@@ -62,32 +62,34 @@ $(document).ready(function() {
 
   // functions for the scoreboard
   function win() {
+    $("#showQuestion").empty()
    $("#showPossibleAnswers").empty()
-   $("#showPossibleAnswers").append("<img src=" + animate + " style='width: 250px'></img>")
+   $("#showPossibleAnswers").append("<img></img>")
     correctAnswers++;
     setTimeout(run, 3000);
    
   }
   function lose() {
-    animate = "https://giphy.com/gifs/Sid4QgwDxJ8l2/html5";
     $("#showPossibleAnswers").empty()
-    $("#showPossibleAnswers").append("<img src=" + animate + " style='width: 250px'></img>")
+    $("#showPossibleAnswers").html("<img src=../assets/images/sadbat.jpg</img>");
+    var rightAnswer = $("#showQuestion");
+    rightAnswer.append("<p>@The correct answer is:" + quiz[index].answers[i]);
     incorrectAnswers++;
     setTimeout(run, 3000);
- 
+    $("#showPossibleAnswers").empty()
+
   }
   function outOfTime() {
     stop(); 
-    animate = "https://giphy.com/gifs/Sid4QgwDxJ8l2/html5";
     $("#showPossibleAnswers").empty()
-    $("#showPossibleAnswers").append("<img src=" + animate + " style='width: 250px'></img>")
+    $("#showPossibleAnswers").append("<img src=../assets/images/disapproves.jpg</img>")
     unanswered++;
     setTimeout(run, 3000);
   }
 
   function displayScoreBoard() {
     var scoreBoard = $("#quizArea");
-    scoreBoard.html("<p>@Wins: " + correctAnswers + "</p>").css("font-size","40px");
+    scoreBoard.append("<p>@Wins: " + correctAnswers + "</p>").css("font-size","40px");
     scoreBoard.append("<p>@Losses: " + incorrectAnswers + "</p>").css("font-size","40px");
     scoreBoard.append("<p>@Unanswered: " + unanswered + "</p>").css("font-size","35px");
   }
