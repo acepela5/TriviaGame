@@ -18,13 +18,13 @@ $(document).ready(function() {
         "John and Elizabeth",
         "Anthony and Patricia"
       ],
-      correct: [1],
+      correct: "1",
       animate: "../images/symbol.gif"
     },
     {
       question: "Which of these villains was introduced first?",
       answers: ["The Riddler", "Penguin", "Killer Croc", "Catwoman"],
-      correct: 3,
+      correct: [3],
       animate: "https://giphy.com/gifs/TlK63EvSQlC3joA3Zja/html5"
     },
     {
@@ -35,27 +35,27 @@ $(document).ready(function() {
         "Eli Pennyworth",
         "Michael Gill"
       ],
-      correct: 0,
+      correct: [0],
       animate: "https://giphy.com/gifs/y4G4trcBoUgWk/html5"
     },
     {
       question: "Which character becomes Oracle after being shot?",
       answers: ["Catwoman", "Poison Ivy", "Batgirl", "Batwoman"],
-      correct: 2,
+      correct: [2],
       animate: "https://giphy.com/gifs/bJaxgozZusl2g/html5"
     },
     {
       question:
         "Which of the following characters is an actual Batman villian?",
       answers: ["Calendar Man", "Ice Man", "Phone Man", "Alligator Man"],
-      correct: 0,
+      correct: [0],
       animate: "https://giphy.com/gifs/3ohzdCTBKqn8nviNdm/html5"
     }
   ];
 
   console.log(quiz);
   console.log(quiz[0].question);
-  console.log(quiz[1].answers[1]);
+  console.log(quiz[1].correct);
 
   // timer used from interval activity
   $("#startButton").on("click", showTriva);
@@ -70,26 +70,29 @@ $(document).ready(function() {
    
   }
   function lose() {
+    $("#showQuestion").empty() 
     $("#showPossibleAnswers").empty()
     $("#showPossibleAnswers").html("<img src=../assets/images/sadbat.jpg</img>");
     var rightAnswer = $("#showQuestion");
-    rightAnswer.append("<p>@The correct answer is:" + quiz[index].answers[i]);
+    rightAnswer.append("<p>@The correct answer is: " + quiz[index].correct);
     incorrectAnswers++;
     setTimeout(run, 3000);
-    $("#showPossibleAnswers").empty()
+    
 
   }
   function outOfTime() {
     stop(); 
+    $("#showQuestion").empty() 
     $("#showPossibleAnswers").empty()
-    $("#showPossibleAnswers").append("<img src=../assets/images/disapproves.jpg</img>")
+    $("#showPossibleAnswers").html("<img src=../assets/images/disapproves.jpg</img>")
+    rightAnswer.append("<p>@The correct answer is: " + quiz[index].correct);
     unanswered++;
     setTimeout(run, 3000);
   }
 
   function displayScoreBoard() {
     var scoreBoard = $("#quizArea");
-    scoreBoard.append("<p>@Wins: " + correctAnswers + "</p>").css("font-size","40px");
+    scoreBoard.html("<p>@Wins: " + correctAnswers + "</p>").css("font-size","40px");
     scoreBoard.append("<p>@Losses: " + incorrectAnswers + "</p>").css("font-size","40px");
     scoreBoard.append("<p>@Unanswered: " + unanswered + "</p>").css("font-size","35px");
   }
@@ -111,7 +114,7 @@ $(document).ready(function() {
         clearInterval(intervalId)
       var userResponse = $(this).attr("id");
       console.log(userResponse);
-      if (userResponse === quiz[index].correct) {
+      if (userResponse === quiz[index].correct[i]) {
         win();
       } else {
         stop();
