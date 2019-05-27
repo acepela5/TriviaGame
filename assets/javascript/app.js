@@ -1,6 +1,6 @@
 $(document).ready(function() {
-  // variables
-  var number = 10;
+    // variables
+  var number = 11;
   var intervalId;
 
   var correctAnswers = 0;
@@ -18,8 +18,8 @@ $(document).ready(function() {
         "John and Elizabeth",
         "Anthony and Patricia"
       ],
-      correct: 1,
-      animate: "https://giphy.com/gifs/jIzXYqaQ0nLkA/html5"
+      correct: [1],
+      animate: "../images/symbol.gif"
     },
     {
       question: "Which of these villains was introduced first?",
@@ -57,75 +57,91 @@ $(document).ready(function() {
   console.log(quiz[0].question);
   console.log(quiz[1].answers[1]);
 
-  // timer
-  $("#startButton").on("click", run);
+  // timer used from interval activity
+  $("#startButton").on("click", showTriva);
 
-  function run() {
-    clearInterval(intervalId);
-    intervalId = setInterval(decrement, 1000);
-  }
-// making the number decrease
-  function decrement() {
-    number--;
-    $("#countDown").html("<h2>" + number + "</h2>");
-    if (number === 0) {
-      stop();
-      outOfTime();
-      displayScoreBoard();
-    }
-  }
-  function stop() {
-    clearInterval(intervalId);
-  }
-// functions for the scoreboard
+  // functions for the scoreboard
   function win() {
-    animate();
+   $("#showPossibleAnswers").empty()
+   $("#showPossibleAnswers").append("<img src=" + animate + " style='width: 250px'></img>")
     correctAnswers++;
-    setTimeout(function() {}, 3000);
-    index++;
-    run();
+    setTimeout(run, 3000);
+   
   }
   function lose() {
-    animate: "https://giphy.com/gifs/Sid4QgwDxJ8l2/html5";
+    animate = "https://giphy.com/gifs/Sid4QgwDxJ8l2/html5";
+    $("#showPossibleAnswers").empty()
+    $("#showPossibleAnswers").append("<img src=" + animate + " style='width: 250px'></img>")
     incorrectAnswers++;
-    setTimeout(function() {}, 3000);
-    index++;
-    run();
+    setTimeout(run, 3000);
+ 
   }
   function outOfTime() {
-    animate: "https://giphy.com/gifs/5BYHU9Thq7gkH18NxG/html5"
-    unanswered++; 
-    setTimeout(function() {}, 3000);
-    index++;
-    run();
+    stop(); 
+    animate = "https://giphy.com/gifs/Sid4QgwDxJ8l2/html5";
+    $("#showPossibleAnswers").empty()
+    $("#showPossibleAnswers").append("<img src=" + animate + " style='width: 250px'></img>")
+    unanswered++;
+    setTimeout(run, 3000);
   }
+
   function displayScoreBoard() {
-    var scoreBoard = $("<div>");
-    scoreBoard.html(correctAnswers + incorrectAnswers + unanswered);
+    var scoreBoard = $("#quizArea");
+    scoreBoard.html("<p>@Wins: " + correctAnswers + "</p>").css("font-size","40px");
+    scoreBoard.append("<p>@Losses: " + incorrectAnswers + "</p>").css("font-size","40px");
+    scoreBoard.append("<p>@Unanswered: " + unanswered + "</p>").css("font-size","35px");
   }
 
   function showTriva() {
+    $("#showPossibleAnswers").empty();
+    number=11;
+    clearInterval(intervalId);
+    intervalId = setInterval(decrement, 1000);
+    console.log(("index: ", index))
     $("#showQuestion").html(quiz[index].question);
     for (var i = 0; i < quiz[index].answers.length; i++) {
       var answerButton = $("<button>");
       $("#showPossibleAnswers").append(answerButton);
-    answerButton.html(quiz[index].answers[i]);
-    answerButton.attr("id", quiz[index].answers[i]);
-    }
-
+      answerButton.html(quiz[index].answers[i]);
+      answerButton.attr("id", quiz[index].answers[i]);
+    
     $(answerButton).on("click", function() {
+        clearInterval(intervalId)
       var userResponse = $(this).attr("id");
+      console.log(userResponse);
       if (userResponse === quiz[index].correct) {
         win();
       } else {
+        stop();
         lose();
       }
-      if (userResponse !== quiz[index].correct || number === 0) {
-        outOfTime();
       }
-    });
+    )};
+}
+
+ 
+  // timer used from interval activity
+  function run() {
+    showTriva()
+    index++
+    if (index >= quiz.length){
+        displayScoreBoard()
+    }
+    else{
+    showTriva();
+    }
   }
 
-  showTriva();
-  displayScoreBoard();
+  function stop() {
+    clearInterval(intervalId);
+
+  }
+  // making the number decrease
+  function decrement() {
+    number--;
+    $("#countDown").html("<h1>" + number + "</h1>");
+    if (number === 0) {
+     outOfTime();
+    }
+  }
 });
