@@ -2,7 +2,15 @@
     font-family: batmanFont;
     src: url(../images/DKC\ Forever.ttf);
 }
+#restart {
+    margin: 20px;
+    background-color: purple;
+    border-color: black;
+    border-radius: 5px;
+    font-family: batmanFont;
+    position: relative;
 
+}
 body {
     background-image: url(../images/bats-wallpaper.jpg);
     background-size: 900px 800px;
