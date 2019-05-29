@@ -18,13 +18,13 @@ $(document).ready(function() {
         "John and Elizabeth",
         "Anthony and Patricia"
       ],
-      correct: "1",
-      animate: "../images/symbol.gif"
+      correct: 1,
+      img: "../assets/images/symbol.gif"
     },
     {
       question: "Which of these villains was introduced first?",
       answers: ["The Riddler", "Penguin", "Killer Croc", "Catwoman"],
-      correct: [3],
+      correct: 3,
       animate: "https://giphy.com/gifs/TlK63EvSQlC3joA3Zja/html5"
     },
     {
@@ -35,20 +35,20 @@ $(document).ready(function() {
         "Eli Pennyworth",
         "Michael Gill"
       ],
-      correct: [0],
+      correct: 0,
       animate: "https://giphy.com/gifs/y4G4trcBoUgWk/html5"
     },
     {
       question: "Which character becomes Oracle after being shot?",
       answers: ["Catwoman", "Poison Ivy", "Batgirl", "Batwoman"],
-      correct: [2],
+      correct: 2,
       animate: "https://giphy.com/gifs/bJaxgozZusl2g/html5"
     },
     {
       question:
         "Which of the following characters is an actual Batman villian?",
       answers: ["Calendar Man", "Ice Man", "Phone Man", "Alligator Man"],
-      correct: [0],
+      correct: 0,
       animate: "https://giphy.com/gifs/3ohzdCTBKqn8nviNdm/html5"
     }
   ];
@@ -64,17 +64,18 @@ $(document).ready(function() {
   function win() {
     $("#showQuestion").empty()
    $("#showPossibleAnswers").empty()
-   $("#showPossibleAnswers").append("<img></img>")
+   $("#showPossibleAnswers").html("<img src=./assets/images/symbol.gif>");
     correctAnswers++;
+    console.log('CA', correctAnswers);
     setTimeout(run, 3000);
    
   }
   function lose() {
     $("#showQuestion").empty() 
     $("#showPossibleAnswers").empty()
-    $("#showPossibleAnswers").html("<img src=../assets/images/sadbat.jpg</img>");
+    $("#showPossibleAnswers").html("<img src=./assets/images/sadbat1.gif />");
     var rightAnswer = $("#showQuestion");
-    rightAnswer.append("<p>@The correct answer is: " + quiz[index].correct);
+    rightAnswer.append("<p>@The correct answer is: " + quiz[index].answers[quiz[index].correct]);
     incorrectAnswers++;
     setTimeout(run, 3000);
     
@@ -84,7 +85,7 @@ $(document).ready(function() {
     stop(); 
     $("#showQuestion").empty() 
     $("#showPossibleAnswers").empty()
-    $("#showPossibleAnswers").html("<img src=../assets/images/disapproves.jpg</img>")
+    $("#showPossibleAnswers").html("<img src=./assets/images/angrybat.gif>")
     rightAnswer.append("<p>@The correct answer is: " + quiz[index].correct);
     unanswered++;
     setTimeout(run, 3000);
@@ -105,6 +106,7 @@ $(document).ready(function() {
     console.log(("index: ", index))
     $("#showQuestion").html(quiz[index].question);
     for (var i = 0; i < quiz[index].answers.length; i++) {
+        // $("#showPossibleAnswers").append(quiz[index].answers[i] + "<br>");  
       var answerButton = $("<button>");
       $("#showPossibleAnswers").append(answerButton);
       answerButton.html(quiz[index].answers[i]);
@@ -113,8 +115,13 @@ $(document).ready(function() {
     $(answerButton).on("click", function() {
         clearInterval(intervalId)
       var userResponse = $(this).attr("id");
-      console.log(userResponse);
-      if (userResponse === quiz[index].correct[i]) {
+      console.log('CC', userResponse);
+      console.log('AA', quiz[index].answers[quiz[index].correct]);
+      var qAnswer = quiz[index].answers[quiz[index].correct]
+      console.log('BB', quiz[index].correct[i])
+      if (userResponse === qAnswer) {
+          console.log('i won');
+          
         win();
       } else {
         stop();
