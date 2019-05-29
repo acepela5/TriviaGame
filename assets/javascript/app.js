@@ -82,11 +82,12 @@ $(document).ready(function() {
 
   }
   function outOfTime() {
-    stop(); 
+    stop() 
     $("#showQuestion").empty() 
     $("#showPossibleAnswers").empty()
     $("#showPossibleAnswers").html("<img src=./assets/images/angrybat.gif>")
-    rightAnswer.append("<p>@The correct answer is: " + quiz[index].correct);
+    var rightAnswer = $("#showQuestion");
+    rightAnswer.append("<p>@The correct answer is: " + quiz[index].answers[quiz[index].correct]);
     unanswered++;
     setTimeout(run, 3000);
   }
