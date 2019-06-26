@@ -9,10 +9,11 @@ Player is quizzed on their Batman knowledge with this short, giphy quiz! Answeri
 - HTML5
 - CSS
 - Bootstrap
+- JavaScript
 ## Screenshot
 ---
 
-![ ](Screenshot(29).png)
+![ ](/Screenshot(33).png)
 
 
 ## Comments
