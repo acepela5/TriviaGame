@@ -48,9 +48,6 @@ $(document).ready(function() {
     }
   ];
 
-  console.log(quiz);
-  console.log(quiz[0].question);
-  console.log(quiz[1].correct);
 
   // timer used from interval activity
   $("#startButton").on("click", showTriva);
@@ -61,18 +58,20 @@ $(document).ready(function() {
     $("#showPossibleAnswers").empty();
     $("#showPossibleAnswers").html("<img src=./assets/images/symbol.gif>");
     correctAnswers++;
-    console.log("CA", correctAnswers);
-    setTimeout(run, 3000);
+    index++
+    setTimeout(showTriva, 3000);
   }
   function lose() {
     $("#showQuestion").empty();
     $("#showPossibleAnswers").empty();
     $("#showPossibleAnswers").html("<img src=./assets/images/sadbat1.gif />");
     var rightAnswer = $("#showQuestion");
+    
     rightAnswer.append(
       "<p>@The correct answer is: " + quiz[index].answers[quiz[index].correct]
     );
     incorrectAnswers++;
+    index++;
     setTimeout(run, 3000);
   }
   function outOfTime() {
@@ -90,46 +89,52 @@ $(document).ready(function() {
 
   // to play the game
   function showTriva() {
-    $("#showPossibleAnswers").empty();
-    number = 11;
-    clearInterval(intervalId);
-    intervalId = setInterval(decrement, 1000);
-    console.log(("index: ", index));
-    $("#showQuestion").html(quiz[index].question);
-    for (var i = 0; i < quiz[index].answers.length; i++) {
-      var answerButton = $("<button>");
-      $("#showPossibleAnswers").append(answerButton);
-      answerButton.html(quiz[index].answers[i]);
-      answerButton.attr("id", quiz[index].answers[i]);
+    if(index < quiz.length){
+      $("#showPossibleAnswers").empty();
+      number = 11;
+      clearInterval(intervalId);
+      intervalId = setInterval(decrement, 1000);
+      console.log(("index: ", index));
+      $("#showQuestion").html(quiz[index].question);
+      for (var i = 0; i < quiz[index].answers.length; i++) {
+        var answerButton = $("<button>");
+        $("#showPossibleAnswers").append(answerButton);
+        answerButton.html(quiz[index].answers[i]);
+        answerButton.attr("id", quiz[index].answers[i]);
 
-      $(answerButton).on("click", function() {
-        clearInterval(intervalId);
-        var userResponse = $(this).attr("id");
-        console.log("CC", userResponse);
-        console.log("AA", quiz[index].answers[quiz[index].correct]);
-        var qAnswer = quiz[index].answers[quiz[index].correct];
-        console.log("BB", quiz[index].correct[i]);
-        if (userResponse === qAnswer) {
-          console.log("i won");
-
-          win();
-        } else {
-          stop();
-          lose();
-        }
-      });
+        $(answerButton).on("click", function() {
+          clearInterval(intervalId);
+          var userResponse = $(this).attr("id");
+          var qAnswer = quiz[index].answers[quiz[index].correct];
+          if (userResponse === qAnswer) {
+            // index++;
+            win();
+          } else {
+            // index++;
+            stop();
+            lose();
+          }
+        });
+      }
+    }
+    else{
+      displayScoreBoard()
     }
   }
+
   var restartButton = $("#restart");
   $("#restart").append(restartButton);
+
   $(restartButton).on("click", restartGame);
 
   function restartGame() {
+    $("#quizArea").empty();
     correctAnswers = 0;
     incorrectAnswers = 0;
     unanswered = 0;
     index=0;
-    showTriva();
+    run();
+    
   }
 
   function displayScoreBoard() {
@@ -147,13 +152,16 @@ $(document).ready(function() {
 
   // timer used from interval activity
   function run() {
+    
     showTriva();
-    index++;
-    if (index >= quiz.length) {
-      displayScoreBoard();
-    } else {
-      showTriva();
-    }
+    // index++;
+    // if (index >= quiz.length) {
+      
+    //   displayScoreBoard();
+    // } else {
+      
+    //   showTriva();
+    // }
   }
 
   function stop() {
