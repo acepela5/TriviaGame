@@ -9,7 +9,8 @@
     border-radius: 5px;
     font-family: batmanFont;
     position: relative; 
-
+    left: 392px;
+    top: 50px;
 }
 body {
     background-image: url(../images/bats-wallpaper.jpg);
@@ -58,6 +59,8 @@ body {
     border-color: black;
     border-radius: 5px;
     font-family: batmanFont;
+    position: relative;
+    top: -10px;
 }
 
 #header {
@@ -85,8 +88,19 @@ body {
         font-size: 15px;
         left: 5px;
     }
-    #restart {
-        top: 5px;
+  }
+
+@media only screen and (max-width: 900px) {
+     #quizArea {
+        left: 10px;
+        width: 510px;
     }
-    
+    #header {
+        width: 550px;
+        font-size: 20px;
+        left: 5px;
+    }
+    #restart {
+        left: 0px;
+    }
   }
