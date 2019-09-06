@@ -86,7 +86,7 @@ $(document).ready(function() {
     unanswered++;
     setTimeout(run, 3000);
   }
-
+ 
   // to play the game
   function showTriva() {
     if(index < quiz.length){

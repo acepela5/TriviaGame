@@ -13,7 +13,6 @@ Player is quizzed on their Batman knowledge with this short, giphy quiz! Answeri
 ![ ](/Screenshot(33).png)
 
 ## Author
----
 Adi Cepela - https://github.com/acepela5
 
 ## Deployed Link
