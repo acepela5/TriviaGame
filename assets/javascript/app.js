@@ -8,6 +8,7 @@ $(document).ready(function() {
   var unanswered = 0;
   var index = 0;
 
+  $("#restart").hide();
   // questionn / answers / correct answer
   var quiz = [
     {
@@ -89,6 +90,9 @@ $(document).ready(function() {
  
   // to play the game
   function showTriva() {
+
+    $("#restart").show();
+$("#startButton").hide();
     if(index < quiz.length){
       $("#showPossibleAnswers").empty();
       number = 11;
@@ -122,19 +126,18 @@ $(document).ready(function() {
     }
   }
 
-  var restartButton = $("#restart");
-  $("#restart").append(restartButton);
+  // var restartButton = $("#restart");
+  // $("#restart").append(restartButton);
 
-  $(restartButton).on("click", restartGame);
+  $("#restart").on("click", restartGame);
 
   function restartGame() {
-    $("#quizArea").empty();
     correctAnswers = 0;
     incorrectAnswers = 0;
     unanswered = 0;
     index=0;
-    run();
-    
+
+    showTriva();    
   }
 
   function displayScoreBoard() {
@@ -154,14 +157,7 @@ $(document).ready(function() {
   function run() {
     
     showTriva();
-    // index++;
-    // if (index >= quiz.length) {
-      
-    //   displayScoreBoard();
-    // } else {
-      
-    //   showTriva();
-    // }
+   
   }
 
   function stop() {
